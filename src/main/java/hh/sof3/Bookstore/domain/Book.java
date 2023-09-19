@@ -17,9 +17,9 @@ public class Book {
     @Column(name = "production_year")
     private int year;
     private String isbn;
-    private int price;
+    private double price;
 
-    public Book(String title, String author, int year, String isbn, int price) {
+    public Book(String title, String author, int year, String isbn, double price) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -58,10 +58,10 @@ public class Book {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
