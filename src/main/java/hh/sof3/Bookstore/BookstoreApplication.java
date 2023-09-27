@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.sof3.Bookstore.domain.Book;
 import hh.sof3.Bookstore.domain.BookRepository;
+import hh.sof3.Bookstore.domain.Category;
+import hh.sof3.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -16,7 +18,7 @@ public class BookstoreApplication {
 	};
 
 	@Bean
-	public CommandLineRunner demo(BookRepository repository) {
+	public CommandLineRunner demo(BookRepository bRepo, CategoryRepository cRepo) {
 		return (args) -> {
 
 			Book book1 = new Book();
@@ -68,13 +70,34 @@ public class BookstoreApplication {
 			book7.setIsbn("9780316769174");
 			book7.setPrice(9.95);
 
-			repository.save(book1);
-			repository.save(book2);
-			repository.save(book3);
-			repository.save(book4);
-			repository.save(book5);
-			repository.save(book6);
-			repository.save(book7);
+			Category category1 = new Category();
+			category1.setName("scifi");
+
+			Category category2 = new Category();
+			category2.setName("comedy");
+
+			Category category3 = new Category();
+			category3.setName("fantasy");
+
+			Category category4 = new Category();
+			category4.setName("thriller");
+
+			Category category5 = new Category();
+			category5.setName("drama");
+
+			bRepo.save(book1);
+			bRepo.save(book2);
+			bRepo.save(book3);
+			bRepo.save(book4);
+			bRepo.save(book5);
+			bRepo.save(book6);
+			bRepo.save(book7);
+
+			cRepo.save(category1);
+			cRepo.save(category2);
+			cRepo.save(category3);
+			cRepo.save(category4);
+			cRepo.save(category5);
 
 		};
 	}
