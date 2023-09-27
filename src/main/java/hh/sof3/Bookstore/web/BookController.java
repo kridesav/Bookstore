@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.sof3.Bookstore.domain.Book;
 import hh.sof3.Bookstore.domain.BookRepository;
+import hh.sof3.Bookstore.domain.CategoryRepository;
 
 // http://localhost:8080/
 
@@ -18,6 +19,9 @@ import hh.sof3.Bookstore.domain.BookRepository;
 public class BookController {
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private CategoryRepository cRepo;
 
     @RequestMapping(value = { "/", "/booklist" })
     public String bookList(Model model) {
@@ -27,12 +31,13 @@ public class BookController {
 
     @RequestMapping(value = "/addbook")
     public String addbook(Model model) {
+        model.addAttribute("categories", cRepo.findAll());
         model.addAttribute("Book", new Book());
         return "addbook";
     }
 
     @RequestMapping(value = "/savebook", method = RequestMethod.POST)
-    public String save(Book book) {
+    public String save(Book book) {  
         repository.save(book);
         return "redirect:/booklist";
     }

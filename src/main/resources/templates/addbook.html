@@ -20,6 +20,13 @@
 			<label for="year">Year</label> <input type="text" id="year" name="year" th:field="*{year}" /> <br>
 
 			<label for="price">Price</label> <input type="text" id="price" name="price" th:field="*{price}" /> <br>
+
+			<label for="category">Category</label>
+			<select id="category" name="category" th:field="*{category}">
+				<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">test
+				</option>
+			</select> <br>
+
 			<button type="submit">Save</button>
 		</form>
 	</div>
