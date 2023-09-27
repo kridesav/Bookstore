@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Bookstore</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Edit category</h1>
+	<div>
+		<form th:object="${Category}" th:action="@{edit}" action="#" method="post">
+
+			<input type="hidden" id="id" name="id" th:field="*{id}" />
+			
+			<label for="name">Title</label> <input type="text" id="name" name="name" th:field="*{name}" /> <br>
+
+			<button type="submit">Save</button>
+		</form>
+	</div>
+</body>
+
+</html>
