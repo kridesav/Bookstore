@@ -69,7 +69,7 @@ public class BookController {
     }
 
     // Hakee kaikki kirjat taulusta ja palauttaa ne koodilla 200
-	@GetMapping("/api/books")
+	@GetMapping("/books")
 	public ResponseEntity<Iterable<Book>> bookListRest() {
 		Iterable<Book> books = repository.findAll();
 		return new ResponseEntity<Iterable<Book>>(books, HttpStatus.OK);
@@ -77,7 +77,7 @@ public class BookController {
 
 	// Etsii annettulla ID:llä kirjaa, palauttaa löydetyn kirja ja koodin 200
 	// tai tyhjän bodyn koodilla 404
-	@GetMapping("/api/books/{id}")
+	@GetMapping("/books/{id}")
 	public ResponseEntity<Optional<Book>> findBookRest(@PathVariable("id") Long id) {
 		Optional<Book> book = repository.findById(id);
 		if (book.isPresent()) {
