@@ -3,8 +3,11 @@ package hh.sof3.Bookstore.web;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,5 +67,24 @@ public class BookController {
             return "redirect:/booklist";
         }
     }
+
+    // Hakee kaikki kirjat taulusta ja palauttaa ne koodilla 200
+	@GetMapping("/api/books")
+	public ResponseEntity<Iterable<Book>> bookListRest() {
+		Iterable<Book> books = repository.findAll();
+		return new ResponseEntity<Iterable<Book>>(books, HttpStatus.OK);
+	}
+
+	// Etsii annettulla ID:llä kirjaa, palauttaa löydetyn kirja ja koodin 200
+	// tai tyhjän bodyn koodilla 404
+	@GetMapping("/api/books/{id}")
+	public ResponseEntity<Optional<Book>> findBookRest(@PathVariable("id") Long id) {
+		Optional<Book> book = repository.findById(id);
+		if (book.isPresent()) {
+			return new ResponseEntity<Optional<Book>>(book, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Optional<Book>>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

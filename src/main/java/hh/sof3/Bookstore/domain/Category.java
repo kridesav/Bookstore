@@ -8,6 +8,9 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 
 @Entity
@@ -18,7 +21,9 @@ public class Category {
 
     private String name;
 
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @JsonIgnoreProperties("category")
     private List<Book> books;
     
 
