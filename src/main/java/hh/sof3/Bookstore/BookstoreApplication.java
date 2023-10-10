@@ -9,6 +9,8 @@ import hh.sof3.Bookstore.domain.Book;
 import hh.sof3.Bookstore.domain.BookRepository;
 import hh.sof3.Bookstore.domain.Category;
 import hh.sof3.Bookstore.domain.CategoryRepository;
+import hh.sof3.Bookstore.domain.User;
+import hh.sof3.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -18,7 +20,7 @@ public class BookstoreApplication {
 	};
 
 	@Bean
-	public CommandLineRunner demo(BookRepository bRepo, CategoryRepository cRepo) {
+	public CommandLineRunner demo(BookRepository bRepo, CategoryRepository cRepo, UserRepository uRepo) {
 		return (args) -> {
 			Category category1 = new Category();
 			category1.setName("scifi");
@@ -108,6 +110,11 @@ public class BookstoreApplication {
 			bRepo.save(book5);
 			bRepo.save(book6);
 			bRepo.save(book7);
+
+			User user1 = new User("user", "$2a$12$QkYGF6nkoi8D4UCiDKSPr.gr0Xw1h9boKeyky0goH3FXBecJS6TAq" , "USER", "user@user.com");
+			User user2 = new User("admin", "$2a$12$Rg9G9n6KevzjGCW0wiDANuh0hoXoHFuhXyguk/PC4fFDGjouMA.8." , "ADMIN", "admin@admin.com");
+			uRepo.save(user1);
+			uRepo.save(user2);
 
 		};
 	}
